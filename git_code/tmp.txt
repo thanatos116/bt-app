@@ -1,0 +1,102 @@
+Patch:1 a797093   AVRCP: Fix for undoing the parameter change in send_metamsg_rsp
+[31m ========Patch not exist========== [0m
+Patch:2 7f4b62a   AVDTP 1.3: Delay report feature implementation
+[31m ========Patch not exist========== [0m
+Patch:3 fd6340a   SplitA2dp: Change a2dp_offload_cap property name
+[31m ========Patch not exist========== [0m
+Patch:4 02b9159   AVRCP SHO & MCast: Reject second browsing channel
+[31m ========Patch not exist========== [0m
+Patch:5 74ed671   BT: Fix for crash while sending hci data during shutdown
+[31m ========Patch not exist========== [0m
+Patch:6 60a84f5   Prevent abort in case of command timeout
+[31m ========Patch not exist========== [0m
+Patch:7 77c9e7c   AVRCP: Handle RC disconnect
+[31m ========Patch not exist========== [0m
+Patch:8 dc21294   Fix the issue with cleanup
+[31m ========Patch not exist========== [0m
+Patch:9 ce11932   Fix crashes on stack shutdown
+[36m ========PatchID find========== [0m
+Patch:10 a11a0b5   GAP: Don't initiate ACL connection in collision scenario.
+[31m ========Patch not exist========== [0m
+Patch:11 b42f33b   HOGP: Fixes for support multiple hid service
+[31m ========Patch not exist========== [0m
+Patch:12 b5a52ff   Bluetooth : HF : Fix HF audio can't be switched between HF and AG
+[31m ========Patch not exist========== [0m
+Patch:13 926a5b1   LE connection related changes
+[31m ========Patch not exist========== [0m
+Patch:14 b191125   AVRCP fixes for dual A2DP
+[31m ========Patch not exist========== [0m
+Patch:15 017d63c   Make BT stack recover after receiving H/W Error event
+[31m ========Patch not exist========== [0m
+Patch:16 f848938   SplitA2dp: Add SCMS_T support
+[31m ========Patch not exist========== [0m
+Patch:17 4cadb16   SplitA2dp: Fix for dead object exception
+[31m ========Patch not exist========== [0m
+Patch:18 d47c89a   Hogp Multiple instance of hid service support
+[31m ========Patch not exist========== [0m
+Patch:19 6e5158f   Add tracking of periodic_enable in adv_inst
+[31m ========Patch not exist========== [0m
+Patch:20 8eea754   SplitA2dp: Do not disconnect AV for all offload req failures
+[31m ========Patch not exist========== [0m
+Patch:21 4062a9f   Misc changes in Audio profiles.
+[31m ========Patch not exist========== [0m
+Patch:22 f680728   HFP: Squashed changes for O propagation
+[31m ========Patch not exist========== [0m
+Patch:23 5677675   A2DP and AVRCP : Misc A2DP and AVRCP changes
+[31m ========Patch not exist========== [0m
+Patch:24 a4ddb32   A2DP: Codec switch support in dual a2dp mode.
+[31m ========Patch not exist========== [0m
+Patch:25 eff259b   btif: Pass UIDs changed up to the Java layer
+[36m ========PatchID find========== [0m
+Patch:26 5235a8c   Fix BLE remote address resolution
+[36m ========PatchID find========== [0m
+Patch:27 4116528   Fix processing of Inquiry results data
+[32m ========PatchID not find, but find same title patch========== [0m
+Patch:28 77ecddc   Fix peer address type in LE extended create connection command
+[36m ========PatchID find========== [0m
+Patch:29 b5c932f   Add a mechanism to avoid using AVDTP RECONFIGURE for blacklisted devices
+[36m ========PatchID find========== [0m
+Patch:30 72f658a   PBAP: Add support for PBAP 1.2 blacklisting logic
+[31m ========Patch not exist========== [0m
+Patch:31 78120a1   Disable 48.0kHz sampling rate for AAC - update the unit test
+[36m ========PatchID find========== [0m
+Patch:32 6e2a05c   Bluetooth: DUT rejects incoming connection
+[31m ========Patch not exist========== [0m
+Patch:33 725f663   Set correct se.sigev_value.sival_ptr value when creating timer
+[31m ========Patch not exist========== [0m
+Patch:34 44e93ac   Set wp_data_timer to 0 after deleting it
+[31m ========Patch not exist========== [0m
+Patch:35 ad5cc0f   BT: Avoid alarm structure usage after callback execution
+[31m ========Patch not exist========== [0m
+Patch:36 ae56345   A2DP: Fix propagation
+[31m ========Patch not exist========== [0m
+Patch:37 cab680a   Bluetooth: In Dual A2DP, Get RC Feature fails
+[31m ========Patch not exist========== [0m
+Patch:38 b71106e   BT: Supported changes for certification tools & VHAL
+[31m ========Patch not exist========== [0m
+Patch:39 3991f15   A2DP: Connect after avrcp connection
+[31m ========Patch not exist========== [0m
+Patch:40 3c6ad19   BT: Features supported changes for system/bt
+[31m ========Patch not exist========== [0m
+Patch:41 a87ca9a   Fix HID crashing on no descriptor
+[36m ========PatchID find========== [0m
+Patch:42 2c30af0   BT: Replace banned functions
+[31m ========Patch not exist========== [0m
+Patch:43 e926486   bta_dm: Stop copying garbage
+[36m ========PatchID find========== [0m
+Patch:44 266a434   BT_BOND: Report repeated_attempts failure to application Change-Id: Id0d5a323daabcd0a50193bb7bc6fde18fde3c5ad
+[31m ========Patch not exist========== [0m
+Patch:45 fe8c5de   Bluetooth: Enable A2dp Multicast.
+[31m ========Patch not exist========== [0m
+Patch:46 8801cad   Disable Filter duplicates while stopping BLE scan
+[31m ========Patch not exist========== [0m
+Patch:47 12fb888   eSCO: Limit number of retries after mSBC connection failure
+[36m ========PatchID find========== [0m
+Patch:48 7fe8691   Ignore the Class Of Device if the value is invalid
+[36m ========PatchID find========== [0m
+Patch:49 e003572   Fix GATT over BREDR not connecting
+[36m ========PatchID find========== [0m
+Patch:50 05f71ad   LE Pairing and connection related changes
+[31m ========Patch not exist========== [0m
+[46;37m final result in /home/vichuang/fastScript/git_code/final/20170821_161019/final_result.txt [0m
+[46;37m cp to logFile/git_compare_patch/ [0m

@@ -1,0 +1,128 @@
+#!/bin/bash
+#PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+#export PATH
+
+#the file for settings
+folder_list="folder_list.txt"
+final_result_file="final_result.txt"
+# none : same patchID : same commitID : same title : not exist
+final_status="none"
+
+check_commit_number="300"
+oriFolder="`cat $folder_list | egrep "patchFolder:" | sed 's/patchFolder://g'`"
+destFolder="`cat $folder_list | egrep "destFolder:" | sed 's/destFolder://g'`"
+patch_path="`cat $folder_list | egrep "patch_path:" | sed 's/patch_path://g'`"
+#timestamp ex:20151123_195700
+final_folder_time="`cat $folder_list | egrep "latestFolder:" | sed 's/latestFolder://g'`"
+#absolute path for final output
+final_result_path="/home/vichuang/fastScript/git_code/final/$final_folder_time"
+final_result_file_path="${final_result_path}/$final_result_file"
+#echo $final_result_path
+#done
+#echo $oriFolder
+#echo $destFolder
+#echo $final_folder
+#the file saved "commitID $ commit title"
+titlefile="${patch_path}${final_folder_time}/tmp.txt"
+exec < $titlefile
+
+
+patch_path="/home/vichuang/fastScript/git_code/final/"
+same_title_patch="${final_result_path}/same_title/"
+not_exist_patch="${final_result_path}/not_exist/"
+
+timelog=$(date +"%Y%m%d_%H%M%S")
+
+compareNumber="-$check_commit_number"  # --all mean all commit 
+#echo -e "$compareNumber"
+
+count=0
+while read line
+do
+    #separate commitID $ commitTitle 
+    commitId=`echo -e "$line" | awk -F"$" '{print $1}' | sed 's/^ *//g' | sed 's/ *$//g'`
+    commitTitle=`echo -e "$line" | awk -F"$" '{print $2}' | sed 's/^ *//g' | sed 's/ *$//g'`
+
+    count=$((count+1))
+    echo ""
+    echo -e "$count: $line"
+  
+    #check Patch-Id  
+    cd $oriFolder
+    TARGET_COMMIT_PATCHID=$(
+    git show --patch-with-raw "$commitId" |
+    git patch-id |
+    cut -d' ' -f1
+    )
+    cd $destFolder
+#for c in $(git rev-list HEAD $compareNumber); do
+#        git show --patch-with-raw "$c" |
+#            git patch-id
+#done 
+    MATCHING_COMMIT_SHAS=$(
+    for c in $(git rev-list HEAD $compareNumber); do
+        git show --patch-with-raw "$c" |
+            git patch-id
+    done |
+        fgrep "$TARGET_COMMIT_PATCHID" |
+        cut -d' ' -f2
+    )
+
+    #if patch id exit
+    if [ -n "$MATCHING_COMMIT_SHAS" ]; then
+        echo -e "\033[34m ==========PatchId  exist !==============================\033[0m" 
+        final_status="PatchId exist" 
+    else
+    
+    #patch-id not exist  check commitID
+    if [ -n "`git log --pretty=format:"%H" | egrep "$commitId"`" ]; then
+        echo -e "\033[36m ==========commitId  exist !==============================\033[0m" 
+        final_status="commitId exist"
+    else 
+    #patch-id not exist  check commitTitle
+        if [ -n "`git log --pretty=format:"%s" | grep -F "$commitTitle"`" ]; then
+            echo -e "\033[36m ==========commitTitle  exist ! But patchId different=========\033[0m" 
+            final_status="same commit title"
+            
+            if [ ! -d "${same_title_patch}" ]; then
+                mkdir -m 777 ${same_title_patch}
+            fi
+            
+            #generate  dest patch
+            dest_commitId="`git log --pretty=format:"%H $ %s" | grep -F "$commitTitle" | awk -F"$" '{print $1}' | sed 's/ *$//g'`"
+            echo "$dest_commitId"
+            git format-patch $dest_commitId -1 -o ${same_title_patch} --start-number $count -v1 
+            
+            #generate  ori patch
+            cd $oriFolder
+            echo "$commitId"
+            #oriCount=$((1000+count))
+            git format-patch $commitId -1 -o ${same_title_patch} --start-number $count -v2
+
+        #######  no same patchID, same commitID and same title #############################
+        else 
+            echo -e "\033[31m ==========not exist !==============================\033[0m" 
+            final_status="not exist"
+            
+            if [ ! -d "${not_exist_patch}" ]; then
+                mkdir -m 777 ${not_exist_patch}
+            fi
+            
+            cd $oriFolder
+            git format-patch $commitId -1 -o ${not_exist_patch} --start-number $count
+        fi
+    
+    fi
+
+    fi
+
+if [ ! -f "$final_result_file_path" ]; then
+    touch ${final_result_file_path}
+    chmod 777 ${final_result_file_path}
+fi
+echo "$count $ $commitId $ $commitTitle $ $final_status" >> ${final_result_file_path} 
+
+
+done 
+
+

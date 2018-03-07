@@ -1,0 +1,3 @@
+set folder_list.txt config 
+open final_result.txt with excel
+done

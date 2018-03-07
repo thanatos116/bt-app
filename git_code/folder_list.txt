@@ -1,0 +1,6 @@
+patchFolder:/home/vichuang/codebase/partial_code/msm8998.LA.2.0.1_Pre-ES7.0.0.048.1/system/bt
+destFolder:/home/vichuang/codebase/OceanLifeUHL_Generic_WWE_O80_Mainline_StockUI/system/bt
+oriDeepCommit:500
+destDeepCommit:3000
+patch_path:/home/vichuang/fastScript/git_code/final/
+latestFolder:20161031_174416
