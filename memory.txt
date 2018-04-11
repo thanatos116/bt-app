@@ -1,0 +1,38 @@
+adb shell 'cat /sys/module/htc_bdaddress/parameters/bdaddress'  //讀取bdaddr in os mode
+adb shell am start -n com.htc.android.qxdm2sd/.QXDM2SD
+adb shell am start -n com.htc.android.ssdtest/.MainActivity
+adb shell am start -n com.htc.android.ssdtest/.SystemLoggers
+
+//play music
+adb shell am start -a "android.intent.action.VIEW" -t "audio/mp3" -d "file:///sdcard/Music/test.mp3"
+adb shell input keyevent 126  play  (可能需要先開啟media)
+adb shell input keyevent 85    pause
+
+adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > screen.png#拍照
+adb shell screencap -p | sed 's/\r$//g' > screen.png
+
+adb shell am start -n com.android.settings/.bluetooth.BluetoothSettings
+
+NOW=$(date +"%m-%d %H:%M:%S.000")
+adb logcat -vtime -T "$NOW" -d > BT_switch_on.txt
+
+adb shell am start -n [PACKAGE-NAME]/[ACTIVITY-NAME]  #開啟app
+adb shell pm list packages -f   #列出packages
+adb shell dumpsys activity activities | sed -En -e '/Running activities/,/Run #0/p'
+
+# svc power
+svc power
+Control the power manager
+usage: svc power stayon [true|false|usb|ac]
+Set the 'keep awake while plugged in' setting.
+//设置屏幕的常亮，true保持常亮，false不保持，usb当插入usb时常亮，ac当插入电源时常亮
+
+//按下power 
+adb shell input keyevent 26
+// unlock screen
+adb shell input keyevent 82
+// 跳到BT setting 畫面
+adb shell am start -n com.android.settings/.bluetooth.BluetoothSettings
+
+adb shell service call bluetooth_manager 8 <-- turn off
+adb shell service call bluetooth_manager 6 <-- turn on
