@@ -1,8 +1,3 @@
-adb shell 'cat /sys/module/htc_bdaddress/parameters/bdaddress'  //讀取bdaddr in os mode
-adb shell am start -n com.htc.android.qxdm2sd/.QXDM2SD
-adb shell am start -n com.htc.android.ssdtest/.MainActivity
-adb shell am start -n com.htc.android.ssdtest/.SystemLoggers
-
 //play music
 adb shell am start -a "android.intent.action.VIEW" -t "audio/mp3" -d "file:///sdcard/Music/test.mp3"
 adb shell input keyevent 126  play  (可能需要先開啟media)
